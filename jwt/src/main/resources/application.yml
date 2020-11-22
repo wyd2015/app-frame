@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: security-jwt
+
+  datasource:
+    druid:
+      # JDBC配置
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.74.130:3306/test?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+      username: root
+      password: 123456
+    
+      # 过滤器
+      filter:
+        slf4j:
+          enabled: true
+          statement-create-after-log-enabled: false
+          statement-prepare-call-after-log-enabled: false
+          result-set-open-after-log-enabled: false
+          result-set-close-after-log-enabled: false
+    
+      # 数据库连接池初始化参数
+      initial-size: 3
+      min-idle: 3
+      max-active: 10
+      max-wait: 60000
+    
+      # StatViewServlet监控账号配置
+      stat-view-servlet:
+        enabled: true
+        login-username: admin
+        login-password: admin
+    
+app:
+  jwt:
+    securityKey: JWT_SECRET_KEY
+    requestHeader: Authorization
+    tokenPrefix: Bearer
+    expiration: 1800
